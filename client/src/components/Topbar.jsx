@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaUserCircle } from 'react-icons/fa'
 import { logout as logoutAction } from '../store/slices/authSlice'
-import { setToken as saveToken } from '../lib/auth'
+import { setToken as saveToken, setUser as saveUser } from '../lib/auth'
 
 export default function Topbar() {
   const { user, token, isAdmin } = useSelector((s) => s.auth)
@@ -23,9 +23,10 @@ export default function Topbar() {
   function logout() {
     // clear token storage and redux state
     saveToken(null)
+    saveUser(null)
     dispatch(logoutAction())
     setOpen(false)
-    navigate('/')
+    navigate('/login')
   }
 
   const isAuthed = !!token || !!user

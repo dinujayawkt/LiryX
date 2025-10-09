@@ -9,9 +9,9 @@ import App from './App.jsx'
 
 // Hydrate auth state from localStorage before rendering
 const preToken = getToken()
-const preUser = getUser()
-if (preToken || preUser) {
-  store.dispatch(hydrate({ user: preUser || null, token: preToken || null }))
+if (preToken) {
+  const preUser = getUser()
+  store.dispatch(hydrate({ user: preUser || null, token: preToken }))
 }
 
 createRoot(document.getElementById('root')).render(
