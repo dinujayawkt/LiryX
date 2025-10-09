@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, NavLink } from 'react-router-dom'
 import api from '../../lib/api'
-import { setToken } from '../../lib/auth'
+import { setToken, setUser } from '../../lib/auth'
 import { setCredentials } from '../../store/slices/authSlice'
 
 export default function Register() {
@@ -24,6 +24,7 @@ export default function Register() {
       // Auto-login after register
       const { data } = await api.post('/auth/login', { email, password })
       setToken(data.token)
+      setUser(data.user)
       dispatch(setCredentials({ user: data.user, token: data.token }))
       navigate('/')
     } catch (err) {

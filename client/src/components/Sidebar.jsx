@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import { FaHome, FaSearch, FaBook } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 export default function Sidebar() {
+  const { isAdmin, token } = useSelector((s) => s.auth)
   const linkBase = 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-purple-500/10 transition-colors'
   const active = 'bg-purple-500/15 text-white border border-purple-500/20'
   return (
@@ -17,11 +19,13 @@ export default function Sidebar() {
         <NavLink className={({isActive}) => `${linkBase} ${isActive ? active : 'text-neutral-300'}`} to="/library">
           <FaBook /> Your Library
         </NavLink>
-        <div className="mt-6 pt-6 border-t border-neutral-800 text-sm text-neutral-400">
-          <NavLink className={({isActive}) => `${linkBase} ${isActive ? active : 'text-neutral-300'}`} to="/admin">
-            Admin Dashboard
-          </NavLink>
-        </div>
+        {token && isAdmin && (
+          <div className="mt-6 pt-6 border-t border-neutral-800 text-sm text-neutral-400">
+            <NavLink className={({isActive}) => `${linkBase} ${isActive ? active : 'text-neutral-300'}`} to="/admin">
+              Admin Dashboard
+            </NavLink>
+          </div>
+        )}
       </nav>
     </aside>
   )

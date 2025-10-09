@@ -4,6 +4,7 @@ import { useNavigate, NavLink } from 'react-router-dom'
 import api from '../../lib/api'
 import { setToken, setUser } from '../../lib/auth'
 import { setCredentials } from '../../store/slices/authSlice'
+import Logo from '../../components/Logo'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -31,11 +32,14 @@ export default function Login() {
   }
 
   return (
-    <section className="min-h-screen grid place-items-center bg-[radial-gradient(1200px_600px_at_50%_-80px,rgba(168,85,247,0.25),transparent)] bg-neutral-950">
-      <div className="w-full max-w-md mx-auto p-6 rounded-2xl border border-purple-500/20 bg-neutral-900/60 backdrop-blur-xl shadow-[0_0_40px_rgba(168,85,247,0.18)]">
-        <div className="flex items-center gap-2 mb-6">
-          <i className='bx bx-log-in text-2xl text-purple-400'></i>
-          <h1 className="text-2xl font-semibold">Welcome back</h1>
+    <section className="min-h-screen grid place-items-center bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(168,85,247,0.20),transparent_60%),radial-gradient(800px_400px_at_80%_120%,rgba(16,185,129,0.18),transparent_60%),#0a0a0a]">
+      <div className="w-full max-w-md mx-auto p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_20px_80px_-20px_rgba(168,85,247,0.45)]">
+        <div className="flex items-center gap-3 mb-5 justify-center">
+          <Logo className="scale-125" withText />
+        </div>
+        <div className="mb-6 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">Welcome to LiryX</h1>
+          <p className="text-neutral-400 text-sm mt-1">Sign in to continue</p>
         </div>
         <form onSubmit={onSubmit} className="space-y-4">
           {error && <div className="text-red-400 text-sm flex items-center gap-2"><i className='bx bxs-error-circle'></i>{error}</div>}
@@ -44,7 +48,7 @@ export default function Login() {
             <div className="relative">
               <i className='bx bx-envelope absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500'></i>
               <input type="email" required value={email} onChange={(e)=>setEmail(e.target.value)}
-                     className="w-full pl-10 pr-3 py-2.5 rounded-lg bg-neutral-900/70 border border-white/10 focus:outline-none focus:border-purple-500 placeholder-neutral-500" placeholder="you@example.com" />
+                     className="w-full pl-10 pr-3 py-2.5 rounded-lg bg-neutral-900/60 border border-white/10 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 placeholder-neutral-500" placeholder="you@example.com" />
             </div>
           </div>
           <div>
@@ -52,13 +56,16 @@ export default function Login() {
             <div className="relative">
               <i className='bx bx-lock-alt absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500'></i>
               <input type="password" required value={password} onChange={(e)=>setPassword(e.target.value)}
-                     className="w-full pl-10 pr-3 py-2.5 rounded-lg bg-neutral-900/70 border border-white/10 focus:outline-none focus:border-purple-500 placeholder-neutral-500" placeholder="••••••••" />
+                     className="w-full pl-10 pr-3 py-2.5 rounded-lg bg-neutral-900/60 border border-white/10 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 placeholder-neutral-500" placeholder="•••••••" />
             </div>
           </div>
-          <button disabled={loading} className="w-full py-2.5 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-60 font-medium shadow-[0_10px_30px_-10px_rgba(168,85,247,0.6)]">
-            {loading ? 'Signing in…' : 'Sign in'}
+          <button disabled={loading} className="group w-full py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-emerald-600 hover:from-purple-500 hover:to-emerald-500 disabled:opacity-60 font-medium shadow-[0_10px_30px_-10px_rgba(168,85,247,0.6)] transition-transform duration-200 active:scale-[0.98]">
+            <span className="inline-flex items-center justify-center gap-2">
+              <span>{loading ? 'Signing in…' : 'Sign in'}</span>
+              <svg className="w-4 h-4 opacity-0 group-hover:opacity-100 transition" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 5L20 12L13 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M20 12H4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
           </button>
-          <p className="text-sm text-neutral-400 text-center">No account? <NavLink className="text-purple-400 hover:underline" to="/register">Create one</NavLink></p>
+          <p className="text-sm text-neutral-400 text-center">No account? <NavLink className="text-purple-300 hover:underline" to="/register">Create one</NavLink></p>
         </form>
       </div>
     </section>
