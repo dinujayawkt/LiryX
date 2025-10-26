@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import Home from './pages/Home.jsx'
 import Search from './pages/Search.jsx'
 import Library from './pages/Library.jsx'
+import Album from './pages/Album.jsx'
+import Playlist from './pages/Playlist.jsx'
 import Login from './pages/auth/Login.jsx'
 import Register from './pages/auth/Register.jsx'
 import AdminDashboard from './pages/admin/Dashboard.jsx'
@@ -29,6 +31,8 @@ function App() {
           <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
           <Route path="/search" element={<RequireAuth><Search /></RequireAuth>} />
           <Route path="/library" element={<RequireAuth><Library /></RequireAuth>} />
+          <Route path="/album/:id" element={<RequireAuth><Album /></RequireAuth>} />
+          <Route path="/playlist/:id" element={<RequireAuth><Playlist /></RequireAuth>} />
 
           {/* Admin only */}
           <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />

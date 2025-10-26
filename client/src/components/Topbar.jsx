@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaUserCircle } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import Logo from './Logo'
 import { logout as logoutAction } from '../store/slices/authSlice'
 import { setToken as saveToken, setUser as saveUser } from '../lib/auth'
 
@@ -32,35 +34,39 @@ export default function Topbar() {
   const isAuthed = !!token || !!user
 
   return (
-    <header className="h-14 border-b border-purple-500/20 bg-neutral-900/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/60 flex items-center justify-between px-4 shadow-[0_10px_30px_-20px_rgba(168,85,247,0.35)]">
-      <div className="font-semibold tracking-wide">Liryx</div>
-      <div className="flex items-center gap-3 relative" ref={menuRef}>
-        {!isAuthed ? (
-          // No buttons here to keep auth as standalone pages like common platforms
-          null
-        ) : (
-          <>
-            {isAdmin && (
-              <NavLink to="/admin" className="px-3 py-1 rounded-lg bg-purple-500/15 text-neutral-200 hover:bg-purple-500/25 border border-purple-500/20 text-sm">Admin</NavLink>
-            )}
-            <button onClick={() => setOpen((v) => !v)} className="flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-purple-500/10">
-              <FaUserCircle className="text-xl" />
-              <span className="text-sm">{user?.name || 'Profile'}</span>
-            </button>
-            {open && (
-              <div className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-purple-500/20 bg-neutral-900/95 backdrop-blur shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]">
-                <div className="px-4 py-3">
-                  <div className="text-sm font-medium">{user?.name || 'User'}</div>
-                  <div className="text-xs text-neutral-400 truncate">{user?.email || ''}</div>
+    <header className="h-16 sticky top-0 z-40 w-full border-b border-white/10 bg-neutral-900/60 supports-[backdrop-filter]:backdrop-blur-md shadow-[0_10px_30px_-20px_rgba(168,85,247,0.45)]">
+      <div className="h-full w-full px-4 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          <Logo className="scale-90" withText={true} />
+        </Link>
+        <div className="flex items-center gap-3 relative" ref={menuRef}>
+          {!isAuthed ? (
+            // No buttons here to keep auth as standalone pages like common platforms
+            null
+          ) : (
+            <>
+              {isAdmin && (
+                <NavLink to="/admin" className="px-3 py-1 rounded-lg bg-purple-500/15 text-neutral-200 hover:bg-purple-500/25 border border-purple-500/20 text-sm">Admin</NavLink>
+              )}
+              <button onClick={() => setOpen((v) => !v)} className="flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-purple-500/10">
+                <FaUserCircle className="text-xl" />
+                <span className="text-sm">{user?.name || 'Profile'}</span>
+              </button>
+              {open && (
+                <div className="absolute right-0 top-full mt-2 w-56 rounded-lg border border-purple-500/20 bg-neutral-900/95 backdrop-blur shadow-[0_20px_40px_-20px_rgba(0,0,0,0.6)]">
+                  <div className="px-4 py-3">
+                    <div className="text-sm font-medium">{user?.name || 'User'}</div>
+                    <div className="text-xs text-neutral-400 truncate">{user?.email || ''}</div>
+                  </div>
+                  <div className="border-t border-purple-500/20" />
+                  <nav className="py-1">
+                    <button onClick={logout} className="w-full text-left px-4 py-2 text-sm hover:bg-purple-500/10">Logout</button>
+                  </nav>
                 </div>
-                <div className="border-t border-purple-500/20" />
-                <nav className="py-1">
-                  <button onClick={logout} className="w-full text-left px-4 py-2 text-sm hover:bg-purple-500/10">Logout</button>
-                </nav>
-              </div>
-            )}
-          </>
-        )}
+              )}
+            </>
+          )}
+        </div>
       </div>
     </header>
   )
