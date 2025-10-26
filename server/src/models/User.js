@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types } = require('mongoose')
 
 const userSchema = new Schema(
   {
@@ -8,6 +8,7 @@ const userSchema = new Schema(
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     // Optional external auth provider id (e.g., Clerk). Make unique but allow multiple nulls.
     clerkId: { type: String, unique: true, sparse: true, default: null },
+    favorites: [{ type: Types.ObjectId, ref: 'Song' }],
   },
   { timestamps: true }
 )
