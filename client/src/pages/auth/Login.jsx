@@ -67,6 +67,48 @@ export default function Login() {
           </button>
           <p className="text-sm text-neutral-400 text-center">No account? <NavLink className="text-purple-300 hover:underline" to="/register">Create one</NavLink></p>
         </form>
+        
+        {/* Testing Credentials Section */}
+        <div className="mt-6 p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 backdrop-blur-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <i className='bx bx-test-tube text-emerald-400 text-lg'></i>
+            <h3 className="text-sm font-semibold text-emerald-300">Test Account</h3>
+          </div>
+          <div className="space-y-2 text-xs">
+            <div className="flex items-center justify-between gap-3 p-2 rounded-lg bg-neutral-900/40 border border-white/5">
+              <div className="flex-1">
+                <p className="text-neutral-500 mb-0.5">Email</p>
+                <p className="text-neutral-200 font-mono">test112233@gmail.com</p>
+              </div>
+              <button 
+                onClick={() => {
+                  navigator.clipboard.writeText('test112233@gmail.com')
+                  setEmail('test112233@gmail.com')
+                }}
+                className="p-2 hover:bg-white/5 rounded-md transition-colors"
+                title="Copy and fill email"
+              >
+                <i className='bx bx-copy text-neutral-400 hover:text-emerald-400'></i>
+              </button>
+            </div>
+            <div className="flex items-center justify-between gap-3 p-2 rounded-lg bg-neutral-900/40 border border-white/5">
+              <div className="flex-1">
+                <p className="text-neutral-500 mb-0.5">Password</p>
+                <p className="text-neutral-200 font-mono">12345</p>
+              </div>
+              <button 
+                onClick={() => {
+                  navigator.clipboard.writeText('12345')
+                  setPassword('12345')
+                }}
+                className="p-2 hover:bg-white/5 rounded-md transition-colors"
+                title="Copy and fill password"
+              >
+                <i className='bx bx-copy text-neutral-400 hover:text-emerald-400'></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
